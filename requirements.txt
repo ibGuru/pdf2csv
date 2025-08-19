@@ -1,0 +1,6 @@
+PyMuPDF
+opencv-python
+aiobotocore
+botocore
+boto3
+openai
