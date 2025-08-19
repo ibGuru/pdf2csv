@@ -394,7 +394,7 @@ def main():
         )
         response_dict = json.loads(response.choices[0].message.content)
         os.makedirs(f"./{project_name}/json_folder", exist_ok=True)
-        with open(f"./{project_name}/json_folder/{project_name.split('*')[0]+str(k)+project_name.split('*')[-1]}.json", "w", encoding="utf-8") as f:
+        with open(f"./{project_name}/json_folder/{project_name+"-"+str(k)}.json", "w", encoding="utf-8") as f:
             json.dump(response_dict, f, indent=4)
 
 if __name__ == "__main__":
