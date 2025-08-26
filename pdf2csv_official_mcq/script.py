@@ -407,7 +407,14 @@ def main():
     keys.sort(key=lambda x: int(x))
 
     for key in tqdm.tqdm(keys):
-        problem_src = project_name.split("_")[1].replace("*", key)
+        # Extract the base pattern and replace * with question number
+        # For project names like "Physics_paper_1__HL", we need to find the part with *
+        # If no * exists, create a proper source identifier
+        if "*" in project_name:
+            problem_src = project_name.replace("*", key)
+        else:
+            # Generate source based on project pattern
+            problem_src = f"{project_name.split('_')[0]}_Q{key}"
 
         if os.path.exists(f"./json_folder/{project_name}/{problem_src}.json"):
             print(f"File already exists for question {key}. Skipping...")

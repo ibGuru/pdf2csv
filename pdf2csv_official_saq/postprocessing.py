@@ -114,6 +114,7 @@ def json_to_excel(project_name, s3_client):
         for sub_problem in problem_data["sub"].keys():
             read_problem(problem_data["sub"][sub_problem], question_id, topic_id_val, source)
     json_folder = os.listdir(f"./{project_name}/json_folder/")
+    json_folder = [f for f in json_folder if f.endswith(".json") and "-" in f]
     json_folder.sort(key=lambda fname: int(fname.split(".")[0].split("-")[-1]))
     for json_file in tqdm.tqdm(json_folder):
         source = json_file.split("_")[-1].split(".")[0]

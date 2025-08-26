@@ -257,7 +257,15 @@ def main():
         pdf_text += "\n"
     pdf_text = pdf_text.replace("", "").replace("\x08", "").replace("\xa02", "").replace("\xa0", "").replace("\u2009", "")
     problem_page_dict = parse_question_pages(pdf_text)
-    saq_answer_dict = answer_parser_refiner(project_name, client)
+    # First get the raw answer dictionary from vision parsing
+    raw_answer_dict = answer_parser_vision(project_name, client)
+    
+    # Save the raw answer for debugging purposes
+    with open("raw_answer.json", "w", encoding="utf-8") as f:
+        json.dump(raw_answer_dict, f, indent=2, ensure_ascii=False)
+    
+    # Then refine the answers
+    saq_answer_dict = answer_parser_refiner(raw_answer_dict, client)
     print("Parse answer dict successfully")
     os.makedirs(f"./diagram/{project_name}", exist_ok=True)
     diagram_saver(project_name)
@@ -386,7 +394,7 @@ def main():
         )
         response_dict = json.loads(response.choices[0].message.content)
         os.makedirs(f"./{project_name}/json_folder", exist_ok=True)
-        with open(f"./{project_name}/json_folder/{project_name.split('*')[0]+str(k)+project_name.split('*')[-1]}.json", "w", encoding="utf-8") as f:
+        with open(f"./{project_name}/json_folder/{project_name+"-"+str(k)}.json", "w", encoding="utf-8") as f:
             json.dump(response_dict, f, indent=4)
 
 if __name__ == "__main__":
