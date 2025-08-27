@@ -329,9 +329,18 @@ def get_problem_attribute(topic_id, source, question_text, option1, option2, opt
         "tags": ""
     }
 
+def extract_number(filename: str) -> int:
+    parts = filename.split('-')
+    if len(parts) >= 4:
+        target = parts[3]
+        match = re.match(r"(\d+)", target)
+        if match:
+            return int(match.group(1))
+    return -1
+
 def load_json_files_from_folder(folder_path: str):
     json_data_list = []
-    for filename in os.listdir(folder_path):
+    for filename in sorted(os.listdir(folder_path), key=extract_number):
         if filename.endswith('.json'):
             file_path = os.path.join(folder_path, filename)
             with open(file_path, 'r', encoding='utf-8') as file:
