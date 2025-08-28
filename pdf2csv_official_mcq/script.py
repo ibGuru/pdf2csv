@@ -331,16 +331,16 @@ def get_problem_attribute(topic_id, source, question_text, option1, option2, opt
 
 def extract_number(filename: str) -> int:
     parts = filename.split('-')
-    if len(parts) >= 4:
-        target = parts[3]
-        match = re.match(r"(\d+)", target)
-        if match:
-            return int(match.group(1))
-    return -1
+    number = parts[-1]
+    return int(number.split('.')[0].split("(")[0])
 
 def load_json_files_from_folder(folder_path: str):
     json_data_list = []
-    for filename in sorted(os.listdir(folder_path), key=extract_number):
+
+    files = sorted([f for f in os.listdir(folder_path) if f.endswith('.json')],
+        key=lambda f: os.path.getctime(os.path.join(folder_path, f))
+    )
+    for filename in files:
         if filename.endswith('.json'):
             file_path = os.path.join(folder_path, filename)
             with open(file_path, 'r', encoding='utf-8') as file:
