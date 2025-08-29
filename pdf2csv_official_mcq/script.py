@@ -420,6 +420,7 @@ def main():
         # For project names like "Physics_paper_1__HL", we need to find the part with *
         # If no * exists, create a proper source identifier
         if "*" in project_name:
+            problem_src = project_name.split("_")[-1]
             problem_src = project_name.replace("*", key)
         else:
             # Generate source based on project pattern
