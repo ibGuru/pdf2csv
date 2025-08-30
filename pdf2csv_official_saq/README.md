@@ -23,6 +23,8 @@ AWS_REGION=ap-northeast-2
 - Place your problem set PDF and its corresponding mark scheme PDF in the `pdf/` directory.
 - The mark scheme PDF must be named as `{problem_set_name}_markscheme.pdf` (e.g., `Biology_paper_2__TZ1_HL.pdf` and `Biology_paper_2__TZ1_HL_markscheme.pdf`).
 - Ensure the names match exactly except for the `_markscheme` suffix.
+- Problem source in excel column is fully dependent on input file names. 
+- Recommend to name pdf like (Subject_name)_(Problem_source_Format + "-*" + .pdf) form. * character is replaced with problem number automatically. (e.g Chemistry_N20-TZ0-P1-*(HL).pdf)
 
 ## Usage
 

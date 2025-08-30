@@ -18,6 +18,8 @@ This project provides a script to automate the digitization of multiple-choice q
   - The mark scheme filename must match the problem set filename, with `_markscheme` appended before `.pdf`.
 - **topics.json:** Topic mapping for each subject.
 - **subject2id.json:** Mapping from subject name to subject ID.
+- Problem source in excel column is fully dependent on input file names. 
+- Recommend to name pdf like (Subject_name)_(Problem_source_Format + "-*" + .pdf) form. * character is replaced with problem number automatically. (e.g Chemistry_N20-TZ0-P1-*(HL).pdf)
 
 ## Usage
 
