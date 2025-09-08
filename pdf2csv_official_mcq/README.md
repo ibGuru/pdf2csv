@@ -13,27 +13,30 @@ This project provides a script to automate the digitization of multiple-choice q
 
 ## Input Files
 
-- **Problem Set PDF:** e.g., `pdf/Chemistry_M25-SPEC-P1a-*.pdf`
-- **Mark Scheme PDF:** e.g., `pdf/Chemistry_M25-SPEC-P1a-*_markscheme.pdf`
+- **Problem Set PDF:** e.g., `pdf/Physics_M22-TZ2-P1-*(HL).pdf`
+- **Mark Scheme PDF:** e.g., `pdf/Physics_M22-TZ2-P1-*(HL)_markscheme.pdf`
   - The mark scheme filename must match the problem set filename, with `_markscheme` appended before `.pdf`.
 - **topics.json:** Topic mapping for each subject.
 - **subject2id.json:** Mapping from subject name to subject ID.
 - Problem source in excel column is fully dependent on input file names. 
-- Recommend to name pdf like (Subject_name)_(Problem_source_Format + "-*" + .pdf) form. * character is replaced with problem number automatically. (e.g Chemistry_N20-TZ0-P1-*(HL).pdf)
+- Recommend to name pdf like (Subject_name)_(Problem_source_Format + "-*" + .pdf) form. * character is replaced with problem number automatically. (e.g Physics_M22-TZ2-P1-*(HL).pdf)
 
 ## Usage
 
 ```bash
-python script.py --project PROJECT_NAME [--subject_id SUBJECT_ID]
+python script.py --project "PROJECT_NAME" --subject_id SUBJECT_ID
 ```
 
-- `PROJECT_NAME`: The base name of the problem set PDF (without extension), e.g., `Chemistry_M25-SPEC-P1a-*`
+- `PROJECT_NAME`: The base name of the problem set PDF (without extension), e.g., `Physics_M22-TZ2-P1-*(HL)`
 - `SUBJECT_ID`: (Optional) The subject ID. If not provided, it is inferred from the project name using `subject2id.json`.
+
+- Naming Rule is very important. You should includ -* in pdf name like below example
+- And must include "" to project name
 
 ### Example
 
 ```bash
-python script.py --project Chemistry_M25-SPEC-P1a-*
+python ./script.py --project "Physics_M22-TZ2-P1-*(HL)"
 ```
 
 ## How It Works
